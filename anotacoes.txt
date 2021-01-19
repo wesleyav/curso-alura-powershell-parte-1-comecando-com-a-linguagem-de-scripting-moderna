@@ -345,3 +345,14 @@ $ PS C:\Scripts> $private:resultado = "essa é a minha variável privada!"
 # No entanto, se tentarmos executar o script ScriptEmMigracao.PS1, que faz parte de um outro contexto, nada será mostrado. Muito legal, não é mesmo?
 
 ################################################
+
+$estilos = Get-Content C:\scripts\styles.css
+$styleTag = "<style> $estilos </style>"
+$tituloPagina = "Relatório de Scripts em Migração"
+$tituloBody = "<h1> $tituloPagina </h1>"
+
+$resultado | 
+    ConvertTo-Html -Head $styleTag -Title $tituloPagina -Body $tituloBody | 
+    Out-File C:\tempGui\relatorio.html
+
+################################################
