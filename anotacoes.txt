@@ -236,3 +236,22 @@ $ PS C:\Scripts> "{0:N2}GB" -f (5445644654 / 1GB)
 $ gci -Recurse -File | Where-Object Name -like "*_migrando_*" | Select-Object Name, { "{0:N2}KB" -f ($_.Length / 1KB) }
 
 ################################################
+
+# Filtrar arquivos em um diretório por um determinado parâmetro exibindo nome e seu tamanho formatado em KB  (qualquer arquivo que contenha *_migrando_*)
+$ gci -Recurse -File |? Name -like "*_migrando_*" | select Name, { "{0:N2}KB" -f ($_.Length / 1KB) }
+
+################################################
+
+
+# Limpando o código
+
+$nameExpr = "Name"
+$lengthExpr = { "{0:N2}KB" -f ($_.Length / 1KB) }
+
+$params = ($nameExpr, $lengthExpr)
+
+gci -Recurse -File |
+    ? Name -like "*_migrando_*" |
+    select $params
+
+    ################################################
