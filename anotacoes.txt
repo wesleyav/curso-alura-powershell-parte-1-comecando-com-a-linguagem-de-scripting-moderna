@@ -314,3 +314,34 @@ gci -Recurse -File |
 #>
 
 ################################################
+
+# No PowerShell temos um conceito chamado Contexto. Quando abrimos uma janela do PowerShell, já temos um contexto. 
+# Nesse contexto, podemos criar variáveis, assim como fazemos com a variável $resultado.
+
+$ PS C:\Scripts> $resultado = "minha variavel do contexto do PowerShell - console"
+
+# Como estamos nesse mesmo contexto, se digitarmos a variável $resultado, ela exibirá dessa forma:
+
+$ PS C:\Scripts> $resultado
+minha variavel do contexto do PowerShell - console
+
+# Mas, no PowerShell, podemos ter contextos aninhados, contextos que nascem dentro do outro. E o que acontece nesse exemplo quando executamos um script?
+# A primeira ação no arquivo ScriptEmMigracao.PS1 é mostrar o conteúdo da variável $resultado na tela. 
+# Nesse contexto de script, repare que não existe, não foi criada uma variável $resultado. 
+# No entanto, se executarmos esse script no console do PowerShell, a primeira ação é mostrar o valor da variável $resultado.
+# Isso acontece porque o contexto desse script é um contexto filho do contexto da janela do PowerShell, e o filho tem acesso às variáveis do contexto pai. 
+# Entretanto, o contexto filho não pode alterar o valor de uma variável do contexto pai.
+# É por isso que, se digitarmos $resultado no console, teremos o valor inalterado.
+# Mas, suponhamos que não queremos que o contexto filho (contexto do script) veja e visite o valor das variáveis do contexto pai. 
+# Será que o contexto pai não pode ter suas variáveis privadas?
+# Se queremos ter um contexto e uma variável privada, podemos utilizar o modificador private. Antes de começar com o teste, vamos fechar essa janela do PowerShell, e abrir outra. 
+# Entraremos no diretório de scripts, e digitaremos o seguinte:
+
+$ PS C:\Scripts> $private:resultado = "essa é a minha variável privada!"
+
+# Sendo assim, não vamos mostrar o seu valor para os contextos filhos. 
+# Então, se do PowerShell do contexto pai digitarmos $resultado, será mostrado na tela o conteúdo essa é a minha variável privada!. 
+# Isso acontece porque o contexto do PowerShell conhece essa variável. 
+# No entanto, se tentarmos executar o script ScriptEmMigracao.PS1, que faz parte de um outro contexto, nada será mostrado. Muito legal, não é mesmo?
+
+################################################
