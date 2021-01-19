@@ -38,7 +38,33 @@ $ rename-item arquivo1.bat arquivo2.bat -WhatIf
 # Atualizar base de ajuda do Power Shell
 $ Update-Help
 
-# Atribuir alis ao comando rename-item
-$ Get-Alias -Name rename
+# Atribuir alias ao comando rename-item
+$ New-Alias rename rename-item
+
+# Verificar o alias do comando rename
+$ Get-Alias rename rename
+
+################################################
+
+# Exibe o diretório onde contém os perfis do Power Shell (variável global)
+$ $PROFILE
+
+# Criar novo item no perfil do Power Shell
+$ new-item $PROFILE
+# É exibido o diretório onde foi criado o arquivo
+
+# Podemos ir até a pasta, e veremos que agora existe um novo arquivo lá Microsoft.PowerShell_profile.ps1. 
+# Abriremos esse arquivo com o "Bloco de Notas". Executaremos nele os comandos que gostaríamos que estivessem sempre em todas as sessões do PowerShell. 
+# No caso, queremos o cmdlet rename-item com um alias para rename. O cmdlet get-childitem com um alias para d. 
+# Dentro desse arquivo, digitaremos:
+
+# new-alias rename rename-item
+# new-alias d get-childitem
+
+# Podemos até pedir para que ele exiba uma mensagem para nós assim que o PowerShell for aberto.
+
+# new-alias rename rename-item
+# new-alias d get-childitem
+# echo "Oi, Guilherme"
 
 ################################################
