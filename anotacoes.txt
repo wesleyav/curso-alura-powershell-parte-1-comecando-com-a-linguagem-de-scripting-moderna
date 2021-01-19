@@ -68,3 +68,49 @@ $ new-item $PROFILE
 # echo "Oi, Guilherme"
 
 ################################################
+
+# Acabamos de esbarrar em mais um mecanismo de segurança do PowerShell. 
+# Esse mecanismo de segurança nos impede de executar scripts do PowerShell pelo PowerShell. 
+# Essa restrição é chamada de Política de Execução, ou em inglês Execution Policies.
+
+# Podemos verificar o item de ajuda about_Execution_Policies para obter mais informações sobre isso. 
+# No PowerShell, podemos digitar:
+
+$ get-help about_execution_policies
+
+# O que desejamos é alterar de Restricted para outro valor, o Unrestricted. 
+# Com ele, podemos executar scripts que não foram assinados por um publicador autorizado, ou dentro de um domínio, sem problema algum.
+# Precisamos obter o valor de política de execução, através do comando Get-ExecutionPolicy.
+
+$ Get-ExecutionPolicy 
+# Restricted
+
+# Se obtivemos com o Get, para alterar utilizaremos o Set-ExecutionPolicy:
+# Set-ExecutionPolicy Unrestricted
+
+# Vamos confirmar! Ops! Ocorreu um outro erro. 
+# Quando alteramos a política de execução, alteramos também uma chave de registro do Windows, gerando assim um erro. 
+# E para evitar esse erro, é preciso executar o PowerShell como administrador. 
+# Então, vamos fechá-lo, e procuraremos novamente pelo PowerShell, porém clicaremos com o botão direito e depois em "Executar como administrador".
+
+# Depois que o PowerShell for aberto como administrador, executaremos o comando Set-ExecutionPolicy unrestricted. 
+# Confirmaremos, e pronto! Não tivemos nenhum erro agora. 
+# Isso acontece porque estamos executando como administrador. Vamos fechar essa sessão do PowerShell, para tentar executar novamente com o profile que criamos.
+
+# Ao clicar no PowerShell (não precisa ser como Administrador), podemos ver que a mensagem do comando echo foi exibida assim que a aplicação foi aberta
+
+# Maravilha! A mensagem que colocamos no profile, está sendo mostrada para nós. Se tentarmos digitar rename, o alias que criamos no profile deverá ser reconhecido.
+
+# Windows PowerShell
+
+Oi, Guilherme
+PS C:\Users\Alura> rename
+
+cmdlet Rename-Item na posição de comando 1 do pipeline
+Forneça valores para os seguintes parâmetros:
+Path:
+
+# Como podemos ver, o comando foi encontrado, e depois foi pedido os valores. Para cancelar, usamos o atalho "Ctrl + L". 
+# Ao utilizarmos o outro alias d que criamos para o comando get-childitem, vemos que ele também está sendo executado com sucesso.
+
+################################################
