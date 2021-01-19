@@ -1,0 +1,16 @@
+# Para executar uma bat no Power Shell
+$ .\ nome+da+bat
+
+# Visualizar as variáveis de ambiente
+$ echo $env:path
+
+# Visualizar o tipo 
+$ $env:path.GetType()
+
+# Visualizar os diretórios de saída das variáveis de ambiente 
+$env:path.Split(';')
+
+# Visualizar os objetos e listar os tipos de método e propriedade disponíveis
+$env:path | Get-Member  
+
+################################################
