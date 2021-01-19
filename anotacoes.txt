@@ -114,3 +114,72 @@ Path:
 # Ao utilizarmos o outro alias d que criamos para o comando get-childitem, vemos que ele também está sendo executado com sucesso.
 
 ################################################
+
+# Existe bastante conteúdo nativo do PowerShell, como podemos ver na lista que aparecerá. Vamos utilizar o about_Profiles:
+$ PS C:\Users\Alura> get-help about_Profiles
+
+# Podemos ver que há muita informação no arquivo de Profiles. Ao acessarmos o conteúdo um pouco mais adiante, veremos alguns diretórios de $Profile:
+Name                                Description
+--------------                      -------------
+$Profile                            Current User, Current Host
+$Profile.CurrentUserCurrentHost     Current User, Current Host
+$Profile.CurrentUserAllHosts        Current User, All Hosts
+$Profile.AllUsersCurrentHost         All Users, Current Host
+$Profile.AllUsersAllHosts           All Users, All Hosts
+
+# O que mais se encaixa com a nossa necessidade é o AllUsersCurrentHost (Todos os usuários-Host atual). 
+# Mas antes de visitar essa variável e alterar o script dela, precisamos saber o que é a palavra Host. 
+# O Host é um hospedeiro do PowerShell, é ele quem hospeda a sessão do PowerShell. 
+# É possível ter outros Hosts também, como por exemplo, quando fazemos uma execução remota de scripts, ou quando executamos pelo scheduler do Windows, um script, e assim não aparece a interface gráfica. 
+# Ele simplesmente executa um script do PowerShell. Não é por que não temos uma janela, que não temos um hospedeiro. 
+# Existe um hospedeiro diferente, e não da interface gráfica.
+
+Isso quer dizer que o Host de AllUsersCurrentHost pode também ter o seu profile! Se queremos alterar para Todos os perfis e todos os Hosts, utilizaremos a última opção. Verificaremos qual endereço é esse:
+
+$ PS C:\Users\Alura> $Profile.AllUsersAllHosts
+
+# Temos esse endereço:
+# C:\Windows\System32\WindowsPowerShell\v1.0\profile.ps1
+
+# Ao tentarmos acessar esse diretório, vemos que não existe algum arquivo chamado de profile. 
+# Então, fecharemos o PowerShell, pois não temos uma sessão de administrador, e vamos iniciá-lo novamente, pois não podemos escrever em um diretório do Windows sem ser administrador.
+
+# Após estar na sessão de administrador, vamos digitar novamente:
+
+# PS C:\WINDOWS\system32> $profile.AllUsersAllHosts
+
+# Depois do "Enter", será devolvido aquele mesmo endereço que nos foi retornado anteriormente. 
+# E então, acrescentaremos o comando new-item para escrever um novo arquivo nesse endereço.
+
+# PS C:\WINDOWS\system32> new-item $profile.AllUsersAllHosts
+
+# E o arquivo foi criado!
+
+Mode        LastWriteTime        Length        Name
+----        --------------       ------        ----
+-a----    19/09/2017  20:58        0        profile.ps1
+
+# Para alterar esse arquivo, será necessário abrir o Bloco de Notas como administrador, e então criaremos um profile para todos os usuários dessa máquina. 
+# Digitaremos notepad (comando que faz parte do Path da máquina), e passaremos como argumento, a variável $profile.AllUsersAllHosts, e então será aberto o Bloco de Notas.
+
+new-alias rename Rename-Item
+new-alias d Get-ChildItem
+echo "Oi, pessoal do PowerShell!"
+
+# Salvaremos esse arquivo, e fecharemos o Bloco de Notas. Fecharemos também o PowerShell para abri-lo novamente. 
+# Olhe só! Ocorreu um erro dizendo que o Alias não foi permitido porque já existe um alias com o nome rename. 
+# Uma vez criado um alias chamado rename no perfil de todos os usuários, não podemos criar um novo alias com esse mesmo nome. 
+# O que devemos fazer é editar o arquivo para tirar a criação desses alias. O que irá restar é somente o echo "Oi, pessoal do PowerShell!". 
+# Salvaremos, fecharemos a pasta e o PowerShell.
+
+# Ao abrir novamente o PowerShell, temos a seguinte mensagem:
+
+Oi, pessoal do PowerShell!!!!
+Oi, Guilherme
+PS C:\Users\Alura>
+
+# A frase Oi, pessoal do PowerShell!!!! foi escrito no profile de todos os hosts. Já a frase Oi, Guilherme, vem do nosso profile, do nosso usuário. 
+# No entanto, alteramos esse profile e removemos os comandos de criação de alias. 
+# Mas, ao usar o alias d por exemplo, que se refere ao comando de listagem de diretórios, funciona perfeitamente, pois foi criado no perfil de todos os usuários de todos os Hosts.
+
+################################################
