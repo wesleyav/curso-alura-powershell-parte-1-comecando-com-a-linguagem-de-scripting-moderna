@@ -356,3 +356,43 @@ $resultado |
     Out-File C:\tempGui\relatorio.html
 
 ################################################
+
+# Se o ConvertTo-Html converte para HTML, o ConvertTo-JSON converterá para JSON!
+
+if ($tipoDeExportacao -eq "HTML") {
+    $estilos = Get-Content C:\Scripts\styles.css
+    $styleTag = "<style> $estilos </style>"
+    $tituloPagina = "Relatório de Scripts em Migração"
+    $tituloBody = "<h1> $tituloPagina </h1>"
+
+    $resultado | 
+        ConvertTo-Html -Head $styleTag -Title $tituloPagina -Body $tituloBody | 
+        Out-File C:\tempGui\relatorio.html
+} elseif ($tipoDeExportacao -eq "JSON") {
+    $resultado | 
+        ConvertTo-JSON |
+        Out-File C:\tempGui\relatorio.json
+}
+
+# Converter para CSV é o mesmo processo.
+
+if ($tipoDeExportacao -eq "HTML") {
+    $estilos = Get-Content C:\Scripts\styles.css
+    $styleTag = "<style> $estilos </style>"
+    $tituloPagina = "Relatório de Scripts em Migração"
+    $tituloBody = "<h1> $tituloPagina </h1>"
+
+    $resultado | 
+        ConvertTo-Html -Head $styleTag -Title $tituloPagina -Body $tituloBody | 
+        Out-File C:\tempGui\relatorio.html
+} elseif ($tipoDeExportacao -eq "JSON") {
+    $resultado | 
+        ConvertTo-JSON |
+        Out-File C:\tempGui\relatorio.json
+} elseif ($tipoDeExportacao -eq "CSV") {
+    $resultado | 
+        ConvertTo-CSV |
+        Out-File C:\tempGui\relatorio.csv
+}
+
+################################################
