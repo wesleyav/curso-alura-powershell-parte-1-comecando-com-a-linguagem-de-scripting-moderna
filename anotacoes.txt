@@ -189,3 +189,32 @@ PS C:\Users\Alura>
 New-Alias rename Rename-Item echo "Olá, usuário!"
 
 ################################################
+
+# Filtrar arquivos em um diretório por um determinado parâmetro (qualquer arquivo que contenha *_migrando_*)
+$ gci -Recurse -File | Select-Object Name | Where-Object { $_ -like "*_migrando_*" }
+
+# Filtrar arquivos em um diretório por um determinado parâmetro exibindo nome e tamanho (qualquer arquivo que contenha *_migrando_*)
+$ gci -Recurse -File | Where-Object Name -like "*_migrando_*" | Select-Object Name, Length
+
+Name                                    Length
+----                                    -------
+DateParts_migrando_Fernanda.bat            649
+pipeIf_migrando_Thiago.bat                1207
+remCrasher_migrando_Guilherme.bat           27
+callcolons_migrando_Marcos.bat             129
+defaultJumpDir_migrando_Marcos.bat         682
+emptyTokens_migrando_Fernanda.bat          788
+fileRedirection_migrando_Marcos.bat        327
+fileassembler_migrando_Fernanda.bat        400
+fileModifiedTime_migrando_Thiago.bat       947
+fileTimes_migrando_Marcos.bat              799
+sha1_migrando_Guilherme.bat               1080
+sha256_migrando_Guilherme.bat             1096
+sha384_migrando_Guilherme.bat             1096
+SHA512_migrando_Guilherme.bat             1096
+dirTimesNET_migrando_Fernanda.bat         2123
+gzipJS_migrando_Marcos.bat                2794
+listEncodings_migrando_Ana.bat            1633
+selectFolder_migrando_Ana.bat              753
+
+################################################
