@@ -14,3 +14,11 @@ $env:path.Split(';')
 $env:path | Get-Member  
 
 ################################################
+
+# Obter os alias do Shell
+$ Get-Alias
+
+# Obter os alias do comando dir no Shell
+$ Get-Alias -Name dir
+
+################################################
