@@ -218,3 +218,16 @@ listEncodings_migrando_Ana.bat            1633
 selectFolder_migrando_Ana.bat              753
 
 ################################################
+
+# Exibir o tamanho do arquivo
+$ PS C:\Scripts> "{0:N2}" -f (5445644654 / 1GB)
+5,07
+
+# Funcionou! Pois nós deixamos bem claro que queremos o primeiro índice 0 formatado para o "N2". 
+# Indicamos o primeiro índice pois nós podemos passar outros valores. Eles são separados por vírgulas.
+
+# Não é necessário fazer um append na string com um "+" para acrescentar o GB, podemos colocá-lo diretamente no formato.
+
+$ PS C:\Scripts> "{0:N2}GB" -f (5445644654 / 1GB)
+
+################################################
