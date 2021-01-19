@@ -183,3 +183,9 @@ PS C:\Users\Alura>
 # Mas, ao usar o alias d por exemplo, que se refere ao comando de listagem de diretórios, funciona perfeitamente, pois foi criado no perfil de todos os usuários de todos os Hosts.
 
 ################################################
+
+# Criar um arquivo com o nome Microsoft.PowerShell_profile.ps1 no diretório C:\Users\SEU_USUARIO\Documents\WindowsPowerShell\ com o conteúdo
+
+New-Alias rename Rename-Item echo "Olá, usuário!"
+
+################################################
