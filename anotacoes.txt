@@ -231,3 +231,8 @@ $ PS C:\Scripts> "{0:N2}" -f (5445644654 / 1GB)
 $ PS C:\Scripts> "{0:N2}GB" -f (5445644654 / 1GB)
 
 ################################################
+
+# Filtrar arquivos em um diretório por um determinado parâmetro exibindo nome e seu tamanho formatado em KB  (qualquer arquivo que contenha *_migrando_*)
+$ gci -Recurse -File | Where-Object Name -like "*_migrando_*" | Select-Object Name, { "{0:N2}KB" -f ($_.Length / 1KB) }
+
+################################################
