@@ -286,3 +286,31 @@ gci -Recurse -File |
             { "{0:N2}MB" -f ($_.Length / 1MB) }
 
 ################################################
+
+
+# Aqui a gente cria um hashtable para a coluna de nome
+$nameExpr = @{
+    Label = "Nome";
+    Expression = { $_.Name }
+}
+
+# Também montamos um hashtable. Só que esse daqui é pro Tamanho
+$lengthExpr = @{
+    Label = "Tamanho";
+    Expression = { "{0:N2}KB" -f ($_.Length / 1KB) }
+}
+
+# Basta usar uma vírgula e nós temos um array
+$params = $nameExpr, $lengthExpr
+
+gci -Recurse -File |
+    ? Name -like "*_migrando_*" |
+    select $params
+
+
+<#
+    Comentário da linha um que continua
+    até a linha dois
+#>
+
+################################################
