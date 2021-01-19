@@ -275,3 +275,14 @@ gci -Recurse -File |
     select $params
 
 ################################################
+
+# Nesta atividade, de forma muito semelhante, vamos listar todos os arquivos de um diretório, recursivamente, que possuírem de uma extensão específica (como, por exemplo, [nome].exe). 
+# Nossa lista de saída deve possuir uma coluna de nome e tamanho!
+
+    gci -recurse -file |
+        ? Name -like "*.exe" |
+        select `
+            Name, `
+            { "{0:N2}MB" -f ($_.Length / 1MB) }
+
+################################################
