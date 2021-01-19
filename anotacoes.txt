@@ -22,3 +22,23 @@ $ Get-Alias
 $ Get-Alias -Name dir
 
 ################################################
+
+# Obter os comandos no Shell
+$ Get-Command
+
+# Buscando comandos com o parâmetro "rename"
+$ Get-Command -Name *rename*
+
+# Buscar ajuda para o comando "rename-item"
+$ Get-Help -Name rename-item
+
+# Visualizar o que um determinado comando faria se fosse executado
+$ rename-item arquivo1.bat arquivo2.bat -WhatIf
+
+# Atualizar base de ajuda do Power Shell
+$ Update-Help
+
+# Atribuir alis ao comando rename-item
+$ Get-Alias -Name rename
+
+################################################
